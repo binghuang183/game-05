@@ -5,61 +5,26 @@
 <title>工具激活</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-html,body{width:100%;height:100%}
+html,body{width:100%;height:100%;background:#f5f7fa}
+body{display:flex;justify-content:center;align-items:center}
 
-#activatePanel{
-  position:fixed;
-  top:0;left:0;
-  width:100vw;height:100vh;
-  background:#f5f7fa;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-.activate-box{
-  background:#fff;
-  border-radius:16px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.08);
-  padding:40px 32px;
-  width:100%;max-width:420px;
-}
-.activate-box h2{
-  font-size:22px;margin-bottom:8px;color:#111
-}
-.activate-box p{
-  color:#666;margin-bottom:24px
-}
-input{
-  width:100%;padding:14px 16px;
-  border:1px solid #ddd;border-radius:10px;
-  font-size:15px;margin-bottom:16px;
-  background:#fff;color:#000;
-}
-button{
-  width:100%;padding:14px;
-  background:#2d6fff;color:white;
-  border:none;border-radius:10px;
-  font-size:16px;font-weight:500;
-  cursor:pointer;
-}
+.activate-box{background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.08);padding:40px 32px;width:100%;max-width:420px}
+.activate-box h2{font-size:22px;margin-bottom:8px;color:#111}
+.activate-box p{color:#666;margin-bottom:24px}
+input{width:100%;padding:14px 16px;border:1px solid #ddd;border-radius:10px;font-size:15px;margin-bottom:16px}
+button{width:100%;padding:14px;background:#2d6fff;color:white;border:none;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;margin-bottom:10px}
 button:hover{background:#2563e0}
-
-.tip{
-  margin-top:16px;text-align:center;font-size:14px;
-  font-weight:bold;
-}
-.tip.error{color:#ff4444 !important;}
-.tip.success{color:#00b96b !important;}
+.btn-preview{background:#6c757d}
+.btn-preview:hover{background:#5c636a}
+.tip{margin-top:16px;text-align:center;font-size:14px;color:#666}
+.tip.error{color:#ff4444}
+.tip.success{color:#00b96b}
 
 #mainContent{
   display:none;
   position:fixed;top:0;left:0;
   width:100vw;height:100vh;
-  /* 这里已去掉额外黑色背景 */
-  background:transparent;
-  padding:0;margin:0;overflow:auto;
+  background:#fff;padding:0;margin:0;overflow:auto
 }
 </style>
 </head>
@@ -70,291 +35,175 @@ button:hover{background:#2563e0}
     <p>请输入激活码以解锁全部功能</p >
     <input type="text" id="codeInput" placeholder="请输入激活码">
     <button onclick="doActive()">立即激活</button>
-    <div id="tip" class="tip"></div>
+    <button class="btn-preview" onclick="startPreview()">试用5秒预览</button>
+    <div id="tip"></div>
   </div>
 </div>
 
 <div id="mainContent">
-<!-- <!DOCTYPE html>
+  <div style="padding:20px">
+    <h2>已激活 · 正常使用</h2>
+    <p><!DOCTYPE html>
 <html lang="zh-CN">
-<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>反赌博戒赌训练器</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>氪金戒断模拟器</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, -apple-system, sans-serif}
-body{background:#111;color:#fff;padding:20px;max-width:460px;margin:0 auto}
-.card{background:#1a1a1a;padding:22px;border-radius:16px;margin-bottom:16px}
-h2{text-align:center;margin-bottom:10px}
-.tip{color:#ff5555;text-align:center;font-size:14px;margin-bottom:12px}
-
-.manual{
-  background:#222;
-  padding:14px;
-  border-radius:10px;
-  margin-top:16px;
-  font-size:13px;
-  line-height:1.5;
-  color:#ccc;
-}
-.manual h3{
-  color:#ffaa00;
-  font-size:15px;
-  margin-bottom:8px;
-  text-align:center;
-}
-.manual p{margin-bottom:6px}
-.manual strong{color:#fff}
-
-.row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:14px}
-input{width:100%;padding:11px;background:#222;color:#fff;border:1px solid #444;border-radius:8px;margin-bottom:10px}
-.btns{display:flex;gap:8px;margin-bottom:10px}
-.btn{flex:1;padding:12px;border:none;border-radius:8px;font-size:15px}
-.btn-z{background:#0099cc}
-.btn-x{background:#ff4444}
-.btn-h{background:#666}
-.btn-sim{background:#cc2266;margin-top:8px}
-.btn-margin{background:#e65100;margin-top:8px}
-.btn-ant{background:#22a666;margin-top:8px}
-.btn-debt{background:#ff2222;margin-top:8px}
-.btn-curve{background:#4444ff;margin-top:8px}
-
-.road{
-  background:#003d2b;
-  padding:12px;
-  border-radius:10px;
-  margin:12px 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap:5px;
-  min-height:130px;
-  max-width: 100%;
-  justify-content: center;
-  text-align: center;
-}
-.road-item{
-  width: 31px;
-  height: 31px;
-  border-radius:5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size:12px;
-  font-weight: bold;
-  color: #fff;
-  flex-shrink: 0;
-}
-.road-z{background:#0099cc;}
-.road-x{background:#ff4444;}
-.road-h{background:#777;}
-
-/* 🔥 最新一局高亮标记 */
-.road-item.last{
-  border: 2px solid #fff;
-  box-shadow: 0 0 8px 2px #ff0;
-  transform: scale(1.15);
-}
-
-.path{margin:10px 0;color:#aaa;font-size:12px;line-height:1.4}
-.log{background:#222;padding:14px;border-radius:10px;margin-top:10px;font-size:13px;line-height:1.5}
-.green{color:#0f0}
-.red{color:#f33}
-.warn{color:#ffaa00}
-.quote{color:#0f0;margin-top:8px}
+*{box-sizing:border-box;font-family:微软雅黑,sans-serif}
+body{background:#111;color:#fff;max-width:480px;margin:0 auto;padding:20px}
+.box{background:#1a1a2e;border-radius:16px;padding:24px}
+.title{text-align:center;font-size:22px;color:#ff4444;margin-bottom:10px}
+.desc{text-align:center;color:#999;margin-bottom:16px}
+.set{display:flex;gap:8px;margin-bottom:16px}
+.set input{width:100%;padding:8px;border-radius:8px;border:none;background:#222;color:#fff;text-align:center}
+.btns{display:flex;gap:12px;margin-bottom:16px}
+button{flex:1;padding:14px;border:none;border-radius:12px;background:#222;color:#fff;font-size:16px}
+button.ten{background:#c43e3e}
+.pool{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
+.card{aspect-ratio:7/10;background:#222;border-radius:8px;display:grid;place-items:center;color:#777;font-size:12px}
+.star5{background:linear-gradient(135deg,#813,#ffc107);color:#fff}
+.star4{background:linear-gradient(135deg,#516,#d89cfd);color:#fff}
+.taunt{color:#ff6666;text-align:center;font-size:16px;font-weight:bold;margin:10px 0;height:20px}
+.info{color:#ccc;text-align:center;margin-bottom:8px;font-size:15px}
+.log{background:#151522;padding:12px;border-radius:10px;height:180px;overflow-y:auto}
 </style>
-</head>
-<body>
 
-<div class="card">
-  <h2>反赌博戒赌训练器</h2>
-  <div class="tip">先赢是诱饵，输光是结局</div>
+<div class="box">
+  <div class="title">🎮 氪金戒断模拟器</div>
+  <div class="desc">越抽越非，瞬间不想氪金</div>
 
-  <div class="row">
-    <span>初始本金</span>
-    <input type="number" id="initMoney" value="1000" style="width:120px;text-align:center">
-    <button onclick="resetMoney()" style="padding:6px 10px;background:#444;color:#fff;border:none;border-radius:6px">重置</button>
+  <div class="set">
+    <input type="number" id="money" placeholder="初始本金" value="1000">
+    <input type="number" id="price1" placeholder="单抽价格" value="1">
+    <input type="number" id="price10" placeholder="十连价格" value="10">
   </div>
 
-  <div class="row"><span>当前本金</span><span id="money" class="green">1000.00</span></div>
-  <div class="row"><span>总局数</span><span id="round">0</span></div>
-  <div class="row"><span>送赌场抽水</span><span id="tax" class="warn">0.00</span></div>
-
-  <div class="road" id="road"></div>
-
-  <input type="number" id="bet" value="10">
   <div class="btns">
-    <button class="btn btn-z" onclick="play('庄')">押庄</button>
-    <button class="btn btn-x" onclick="play('闲')">押闲</button>
-    <button class="btn btn-h" onclick="play('和')">押和</button>
+    <button onclick="drawOne()">单抽</button>
+    <button class="ten" onclick="drawTen()">十连抽</button>
   </div>
 
-  <button class="btn btn-sim" onclick="simulate()">🧪 10000局长期模拟</button>
-  <button class="btn btn-margin" onclick="martingaleTest()">⚠️ 马丁格尔（必爆仓）</button>
-  <button class="btn btn-ant" onclick="antTest()">🐜 蚂蚁搬家（最稳仍亏）</button>
-  <button class="btn btn-debt" onclick="debtTest()">💸 负债网贷结局</button>
-  <button class="btn btn-curve" onclick="curveTest()">📉 长期亏损曲线</button>
+  <div class="taunt" id="taunt"></div>
+  <div class="info" id="balance">💰 剩余本金：1000</div>
+  <div class="info" id="stat">⭐ 五星：0 | 🔹 四星：0</div>
 
-  <div class="path" id="path"></div>
+  <div class="pool" id="pool"></div>
   <div class="log" id="log"></div>
-
-  <div class="manual">
-    <h3>📘 使用说明</h3>
-    <p><strong>1. 初始本金</strong>：可自定义开始金额，点击【重置】恢复。</p >
-    <p><strong>2. 下注金额</strong>：输入每局下注金额，选择押庄/闲/和。</p >
-    <p><strong>3. 真实规则</strong>：庄赢抽水5%，长期必亏，符合现实赌场。</p >
-    <p><strong>4. 模拟功能</strong>：快速测试10000局、倍投、负债等真实结局。</p >
-    <p><strong>5. 核心目的</strong>：用数学证明赌博必输，帮助戒赌。</p >
-  </div>
-
 </div>
 
 <script>
-let money = 1000;
-let round = 0;
-let tax = 0;
-let path = [];
-let history = [];
+let pity5 = 0
+let count5 = 0
+let count4 = 0
 
-const quotes = [
-  "赢是过程，输是结果，赌场从不养闲人。",
-  "翻本是最大的陷阱，越想翻越输光。",
-  "赢的每一笔，都是让你死得更惨的诱饵。",
-  "十赌九输，不赌为赢，这是数学铁律。",
-  "赌博最终输掉的不是钱，是人生和家庭。"
-];
+const taunts = [
+  "别抽了，你就是非酋本酋",
+  "收手吧，里面全是策划",
+  "再抽就要吃一个月泡面",
+  "你与欧皇彻底无缘",
+  "别人十连双黄，你十连全蓝",
+  "这钱买肉吃不香吗？",
+  "你抽的不是卡，是生活费",
+  "再抽真的要戒不了了",
+  "保底都快吃满了还抽？",
+  "这运气现实也很非吧"
+]
 
-function q() {
-  return quotes[Math.floor(Math.random() * quotes.length)];
+function money() { return +document.getElementById('money').value }
+function price1() { return +document.getElementById('price1').value }
+function price10() { return +document.getElementById('price10').value }
+
+function rand(arr) {
+  return arr[Math.floor(Math.random() * arr.length)]
 }
 
-function refresh() {
-  document.getElementById('money').innerText = money.toFixed(2);
-  document.getElementById('round').innerText = round;
-  document.getElementById('tax').innerText = tax.toFixed(2);
-  drawRoad();
-}
-
-// 🔥 绘制路单 + 最新一局高亮
-function drawRoad() {
-  const el = document.getElementById('road');
-  el.innerHTML = '';
-  const list = history.slice(-42);
-
-  list.forEach((item, index) => {
-    const d = document.createElement('div');
-    if (item === '庄') d.className = 'road-item road-z';
-    else if (item === '闲') d.className = 'road-item road-x';
-    else d.className = 'road-item road-h';
-
-    // 最后一个格子高亮
-    if (index === list.length - 1 && list.length > 0) {
-      d.classList.add('last');
-    }
-
-    d.innerText = item.substring(0,1);
-    el.appendChild(d);
-  });
-}
-
-function resetMoney() {
-  money = Math.max(Number(document.getElementById('initMoney').value) || 1000, 1);
-  round = 0;
-  tax = 0;
-  path = [];
-  history = [];
-  refresh();
-  document.getElementById('log').innerText = "✅ 已重置\n" + q();
-}
-
-function play(typ) {
-  let bet = Number(document.getElementById('bet').value);
-  if (bet <= 0 || bet > money) {
-    alert("下注金额无效");
-    return;
-  }
-
-  const r = Math.random();
-  let res = r < 0.458 ? '庄' : r < 0.904 ? '闲' : '和';
-
-  if (typ === '庄' && res === '庄') {
-    tax += bet * 0.05;
-  }
-
-  path.push(res);
-  history.push(res);
-  if (path.length > 15) path.shift();
-  round++;
-
-  if (typ === res) {
-    if (typ === '庄') money += bet * 0.95;
-    if (typ === '闲') money += bet;
-    if (typ === '和') money += bet * 8;
+function randomTaunt() {
+  if (Math.random() < 0.3) {
+    document.getElementById("taunt").innerText = rand(taunts)
   } else {
-    money -= bet;
-  }
-
-  refresh();
-  document.getElementById('log').innerText = `${typ === res ? '✅ 赢' : '❌ 输'} | 开：${res}\n` + q();
-
-  if (money <= 0) {
-    alert('💀 你已输光！现实中你会借贷、逾期、众叛亲离。');
-    resetMoney();
+    document.getElementById("taunt").innerText = ""
   }
 }
 
-function simulate() {
-  let m = Number(document.getElementById('initMoney').value) || 1000;
-  for (let i = 0; i < 10000 && m > 0; i++) {
-    Math.random() < 0.458 ? (m += 9.5) : (m -= 10);
+function draw() {
+  pity5++
+  let r = Math.random()
+
+  if (pity5 >= 90) {
+    pity5 = 0
+    count5++
+    return { r:5, name: rand(["保底五星", "90抽才出金"]) }
   }
-  document.getElementById('log').innerText = `📉 10000局结局\n最终：${m.toFixed(2)} 元\n长期必亏\n` + q();
+  if (r < 0.002) {
+    pity5 = 0
+    count5++
+    return { r:5, name: "罕见五星" }
+  }
+  if (r < 0.045) {
+    count4++
+    return { r:4, name: "四星" }
+  }
+  return { r:3, name: "三星材料" }
 }
 
-function martingaleTest() {
-  let m = Number(document.getElementById('initMoney').value) || 1000;
-  let bet = 10, maxLoss = 0, curLoss = 0;
-  for (let i = 0; i < 1000 && m > 0; i++) {
-    const res = Math.random() < 0.458 ? '庄' : '闲';
-    if (res === '庄') { m += bet * 0.95; bet = 10; curLoss = 0; }
-    else { m -= bet; bet *= 2; curLoss++; maxLoss = Math.max(maxLoss, curLoss); }
+function ten() {
+  let list = []
+  let has4 = false
+  for (let i=0; i<10; i++) {
+    let c = draw()
+    if (c.r >=4) has4 = true
+    list.push(c)
   }
-  document.getElementById('log').innerText = `⚠️ 马丁结局\n最大连输：${maxLoss}\n最终：${m <= 0 ? '爆仓' : m.toFixed(2)}\n倍投必死\n` + q();
+  if (!has4) {
+    list[9] = { r:4, name:"四星" }
+    count4++
+  }
+  return list
 }
 
-function antTest() {
-  let m = Number(document.getElementById('initMoney').value) || 1000;
-  for (let i = 0; i < 10000 && m > 0; i++) {
-    Math.random() < 0.458 ? m += 9.5 : m -= 10;
-  }
-  document.getElementById('log').innerText = `🐜 蚂蚁搬家\n最终：${m.toFixed(2)} 元\n不爆仓但必亏\n` + q();
+function show(list) {
+  let pool = document.getElementById('pool')
+  pool.innerHTML = ''
+  list.forEach(c => {
+    let div = document.createElement('div')
+    div.className = 'card star' + c.r
+    div.innerText = c.name
+    pool.appendChild(div)
+  })
+
+  randomTaunt()
+  document.getElementById('stat').innerText = `⭐ 五星：${count5} | 🔹 四星：${count4}`
+  document.getElementById('balance').innerText = `💰 剩余本金：${money()}`
+
+  let log = document.getElementById('log')
+  let txt = ''
+  list.forEach(c => {
+    if (c.r ==5) txt += `<p style="color:#ffc107">✅ 出金：${c.name}</p >`
+    else if (c.r ==4) txt += `<p style="color:#d89cfd">🔹 四星：${c.name}</p >`
+    else txt += `<p style="color:#666">♦️ 三星：${c.name}</p >`
+  })
+  log.innerHTML = txt + log.innerHTML
 }
 
-function debtTest() {
-  let m = 1000, debt = 0, bet = 10;
-  for (let i = 0; i < 5000; i++) {
-    Math.random() < 0.458 ? (m += bet * 0.95, bet = 10) : (m -= bet, m < 0 ? (debt -= m, m = 0, bet = Math.min(30, debt / 4)) : bet *= 2);
-  }
-  document.getElementById('log').innerText = `💸 负债结局\n欠债：${debt.toFixed(2)} 元\n家破人亡、征信黑户\n` + q();
+function drawOne() {
+  if (money() < price1()) return alert('本金不足，戒氪成功！')
+  document.getElementById('money').value = money() - price1()
+  show([draw()])
 }
 
-function curveTest() {
-  let m = Number(document.getElementById('initMoney').value) || 1000;
-  let s = "";
-  for (let i = 0; i < 10 && m > 0; i++) {
-    for (let j = 0; j < 1000; j++) Math.random() < 0.458 ? m += 9.5 : m -= 10;
-    s += `${(i+1)*1000} 局 → ${m.toFixed(2)} 元\n`;
-  }
-  document.getElementById('log').innerText = `📉 亏损曲线\n${s}` + q();
+function drawTen() {
+  if (money() < price10()) return alert('本金不足，戒氪成功！')
+  document.getElementById('money').value = money() - price10()
+  show(ten())
 }
-
-resetMoney();
 </script>
 </body>
-</html> -->
-
+</html></p >
+  </div>
 </div>
 
 <script>
+// 100个无规律随机激活码
 const validCodes = [
 "X9K7F2DZ","B5V7S2RG","H3J8D2KF","Z7N2P5DS","M2B7V9FK",
 "Q5S2F7DK","W3J7N2FS","R7D2K9VB","G5B2V7FS","T2S7D9KF",
@@ -400,30 +249,30 @@ function doActive(){
   const tip = document.getElementById('tip');
   const device = getDeviceId();
 
-  tip.className = 'tip';
-
-  if(!code){
-    tip.classList.add('error');tip.innerText='请输入激活码';return;
-  }
-  if(blacklist.includes(code)){
-    tip.classList.add('error');tip.innerText='激活码已禁用';return;
-  }
-  if(!validCodes.includes(code)){
-    tip.classList.add('error');tip.innerText='激活码无效';return;
-  }
-  if(bindRecord[code] && bindRecord[code]!==device){
-    tip.classList.add('error');tip.innerText='已绑定其他设备';return;
-  }
+  if(!code){tip.className='error';tip.innerText='请输入激活码';return;}
+  if(blacklist.includes(code)){tip.className='error';tip.innerText='激活码已禁用';return;}
+  if(!validCodes.includes(code)){tip.className='error';tip.innerText='激活码无效';return;}
+  if(bindRecord[code] && bindRecord[code]!==device){tip.className='error';tip.innerText='已绑定其他设备';return;}
 
   bindRecord[code] = device;
   localStorage.setItem('bindRecord', JSON.stringify(bindRecord));
   localStorage.setItem('activeCode', code);
 
-  tip.classList.add('success');tip.innerText='激活成功';
+  tip.className='success';tip.innerText='激活成功';
   setTimeout(()=>{
     document.getElementById('activatePanel').style.display = 'none';
     document.getElementById('mainContent').style.display = 'block';
   },500);
+}
+
+function startPreview(){
+  document.getElementById('activatePanel').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+  setTimeout(()=>{
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('activatePanel').style.display = 'flex';
+    document.getElementById('tip').innerText='预览结束，请激活后使用';
+  },5000);
 }
 </script>
 </body>
