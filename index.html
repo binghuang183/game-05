@@ -2,49 +2,139 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>工具激活</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-html,body{width:100%;height:100%;background:#f5f7fa}
-body{display:flex;justify-content:center;align-items:center}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+html,body{
+  width:100%;
+  height:100%;
+  background: linear-gradient(135deg, #f6f9fc 0%, #eef2f7 100%);
+}
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding: 20px;
+}
 
-.activate-box{background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.08);padding:40px 32px;width:100%;max-width:420px}
-.activate-box h2{font-size:22px;margin-bottom:8px;color:#111}
-.activate-box p{color:#666;margin-bottom:24px}
-input{width:100%;padding:14px 16px;border:1px solid #ddd;border-radius:10px;font-size:15px;margin-bottom:16px}
-button{width:100%;padding:14px;background:#2d6fff;color:white;border:none;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;margin-bottom:10px}
-button:hover{background:#2563e0}
-.btn-preview{background:#6c757d}
-.btn-preview:hover{background:#5c636a}
-.tip{margin-top:16px;text-align:center;font-size:14px;color:#666}
-.tip.error{color:#ff4444}
-.tip.success{color:#00b96b}
+.activate-box{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 12px 35px rgba(0,0,0,0.06);
+  padding:44px 36px;
+  width:100%;
+  max-width:420px;
+  text-align:center;
+}
+.activate-box h2{
+  font-size:24px;
+  margin-bottom:10px;
+  color:#1f2329;
+  font-weight:600;
+}
+.activate-box p{
+  color:#6e7683;
+  margin-bottom:32px;
+  font-size:15px;
+  line-height:1.5;
+}
+
+input{
+  width:100%;
+  padding:16px 18px;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  font-size:15px;
+  margin-bottom:18px;
+  transition: all 0.2s;
+  outline:none;
+  text-align:center;
+  letter-spacing:1px;
+}
+input:focus{
+  border-color:#2d6fff;
+  box-shadow:0 0 0 3px rgba(45,111,255,0.1);
+}
+
+button{
+  width:100%;
+  padding:16px;
+  background:#2d6fff;
+  color:white;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+  margin-bottom:12px;
+  transition: background 0.2s;
+}
+button:hover{
+  background:#2563e0;
+}
+.btn-preview{
+  background:#f1f5f9;
+  color:#4e5969;
+}
+.btn-preview:hover{
+  background:#e2e8f0;
+}
+button:disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+}
+
+.tip{
+  margin-top:20px;
+  text-align:center;
+  font-size:14px;
+  color:#ff4444;
+  font-weight:500;
+  min-height:18px;
+}
+.tip.success{
+  color:#00b96b;
+}
 
 #mainContent{
   display:none;
-  position:fixed;top:0;left:0;
-  width:100vw;height:100vh;
-  background:#fff;padding:0;margin:0;overflow:auto
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  background:#fff;
+  padding:40px 20px;
+  overflow:auto;
 }
 </style>
 </head>
+
+<body>
 
 <div id="activatePanel">
   <div class="activate-box">
     <h2>工具激活</h2>
     <p>请输入激活码以解锁全部功能</p >
-    <input type="text" id="codeInput" placeholder="请输入激活码">
+    <input type="text" id="codeInput" placeholder="请输入激活码" autocomplete="off">
     <button onclick="doActive()">立即激活</button>
-    <button class="btn-preview" onclick="startPreview()">试用5秒预览</button>
-    <div id="tip"></div>
+    <button class="btn-preview" id="previewBtn" onclick="startPreview()">试用5秒预览</button>
+    <div id="tip" class="tip"></div>
   </div>
 </div>
 
 <div id="mainContent">
-  <div style="padding:20px">
-    <h2>已激活 · 正常使用</h2>
-    <p><!DOCTYPE html>
+  <h2>已激活 · 正常使用</h2>
+  <br>
+  <p><!DOCTYPE html>
 <html lang="zh-CN">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>氪金戒断模拟器</title>
@@ -57,16 +147,36 @@ body{background:#111;color:#fff;max-width:480px;margin:0 auto;padding:20px}
 .set{display:flex;gap:8px;margin-bottom:16px}
 .set input{width:100%;padding:8px;border-radius:8px;border:none;background:#222;color:#fff;text-align:center}
 .btns{display:flex;gap:12px;margin-bottom:16px}
-button{flex:1;padding:14px;border:none;border-radius:12px;background:#222;color:#fff;font-size:16px}
+button{flex:1;padding:14px;border:none;border-radius:12px;background:#222;color:#fff;font-size:16px;cursor:pointer}
 button.ten{background:#c43e3e}
 .pool{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
-.card{aspect-ratio:7/10;background:#222;border-radius:8px;display:grid;place-items:center;color:#777;font-size:12px}
+.card{aspect-ratio:7/10;background:#222;border-radius:8px;display:grid;place-items:center;color:#777;font-size:12px;padding:4px;text-align:center}
 .star5{background:linear-gradient(135deg,#813,#ffc107);color:#fff}
 .star4{background:linear-gradient(135deg,#516,#d89cfd);color:#fff}
 .taunt{color:#ff6666;text-align:center;font-size:16px;font-weight:bold;margin:10px 0;height:20px}
 .info{color:#ccc;text-align:center;margin-bottom:8px;font-size:15px}
-.log{background:#151522;padding:12px;border-radius:10px;height:180px;overflow-y:auto}
+.log{background:#151522;padding:12px;border-radius:10px;height:180px;overflow-y:auto;margin-bottom:16px}
+
+/* 使用说明样式 */
+.manual{
+  background:#222;
+  border-left:4px solid #ff4444;
+  padding:12px 14px;
+  border-radius:8px;
+  margin-top:20px;
+  font-size:14px;
+  line-height:1.5;
+  color:#eee;
+}
+.manual h3{
+  margin:0 0 6px;
+  font-size:16px;
+  color:#ff6666;
+}
+.manual p{margin:4px 0;}
 </style>
+</head>
+<body>
 
 <div class="box">
   <div class="title">🎮 氪金戒断模拟器</div>
@@ -89,6 +199,15 @@ button.ten{background:#c43e3e}
 
   <div class="pool" id="pool"></div>
   <div class="log" id="log"></div>
+
+  <!-- ====== 移到最底部的使用说明 ====== -->
+  <div class="manual">
+    <h3>📘 使用说明</h3>
+    <p>1. 设置初始本金、单抽价格、十连价格，模拟真实抽卡消费。</p >
+    <p>2. 点击【单抽】或【十连抽】按钮消耗本金进行抽卡。</p >
+    <p>3. 90抽保底五星，整体爆率极低，越抽越非，快速戒氪。</p >
+    <p>4. 本金耗尽后弹窗提示“戒氪成功”，解压戒赌神器。</p >
+  </div>
 </div>
 
 <script>
@@ -199,11 +318,9 @@ function drawTen() {
 </script>
 </body>
 </html></p >
-  </div>
 </div>
 
 <script>
-// 100个无规律随机激活码
 const validCodes = [
 "X9K7F2DZ","B5V7S2RG","H3J8D2KF","Z7N2P5DS","M2B7V9FK",
 "Q5S2F7DK","W3J7N2FS","R7D2K9VB","G5B2V7FS","T2S7D9KF",
@@ -234,10 +351,18 @@ function getDeviceId() {
 }
 
 const bindRecord = JSON.parse(localStorage.getItem('bindRecord')) || {};
+let hasPreviewed = localStorage.getItem('hasPreviewed') === 'true';
 
 window.onload = function(){
   const code = localStorage.getItem('activeCode');
   const device = getDeviceId();
+
+  if (hasPreviewed) {
+    const btn = document.getElementById('previewBtn');
+    btn.disabled = true;
+    btn.innerText = '预览次数已用完';
+  }
+
   if(code && bindRecord[code] === device && !blacklist.includes(code) && validCodes.includes(code)){
     document.getElementById('activatePanel').style.display = 'none';
     document.getElementById('mainContent').style.display = 'block';
@@ -249,16 +374,17 @@ function doActive(){
   const tip = document.getElementById('tip');
   const device = getDeviceId();
 
-  if(!code){tip.className='error';tip.innerText='请输入激活码';return;}
-  if(blacklist.includes(code)){tip.className='error';tip.innerText='激活码已禁用';return;}
-  if(!validCodes.includes(code)){tip.className='error';tip.innerText='激活码无效';return;}
-  if(bindRecord[code] && bindRecord[code]!==device){tip.className='error';tip.innerText='已绑定其他设备';return;}
+  if(!code){ tip.innerText='请输入激活码'; return; }
+  if(blacklist.includes(code)){ tip.innerText='激活码已禁用'; return; }
+  if(!validCodes.includes(code)){ tip.innerText='激活码无效'; return; }
+  if(bindRecord[code] && bindRecord[code]!==device){ tip.innerText='已绑定其他设备'; return; }
 
   bindRecord[code] = device;
   localStorage.setItem('bindRecord', JSON.stringify(bindRecord));
   localStorage.setItem('activeCode', code);
 
-  tip.className='success';tip.innerText='激活成功';
+  tip.className = 'tip success';
+  tip.innerText = '激活成功';
   setTimeout(()=>{
     document.getElementById('activatePanel').style.display = 'none';
     document.getElementById('mainContent').style.display = 'block';
@@ -266,13 +392,22 @@ function doActive(){
 }
 
 function startPreview(){
+  if (hasPreviewed) return;
+
+  hasPreviewed = true;
+  localStorage.setItem('hasPreviewed', 'true');
+  const btn = document.getElementById('previewBtn');
+  btn.disabled = true;
+  btn.innerText = '预览次数已用完';
+
   document.getElementById('activatePanel').style.display = 'none';
   document.getElementById('mainContent').style.display = 'block';
+
   setTimeout(()=>{
     document.getElementById('mainContent').style.display = 'none';
     document.getElementById('activatePanel').style.display = 'flex';
-    document.getElementById('tip').innerText='预览结束，请激活后使用';
-  },5000);
+    document.getElementById('tip').innerText = '预览结束，请激活后使用';
+  }, 5000);
 }
 </script>
 </body>
