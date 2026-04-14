@@ -46,8 +46,6 @@ button{
   cursor:pointer;margin-bottom:10px;
 }
 button:hover{background:#2563e0}
-.btn-preview{background:#6c757d}
-.btn-preview:hover{background:#5c636a}
 
 /* 关键修复：提示文字强制高亮可见 */
 .tip{
@@ -74,7 +72,6 @@ button:hover{background:#2563e0}
     <p>请输入激活码以解锁全部功能</p >
     <input type="text" id="codeInput" placeholder="请输入激活码">
     <button onclick="doActive()">立即激活</button>
-    <button class="btn-preview" onclick="startPreview()">试用5秒预览</button>
     <div id="tip" class="tip"></div>
   </div>
 </div>
@@ -430,17 +427,6 @@ function doActive(){
   },500);
 }
 
-function startPreview(){
-  document.getElementById('activatePanel').style.display = 'none';
-  document.getElementById('mainContent').style.display = 'block';
-  setTimeout(()=>{
-    document.getElementById('mainContent').style.display = 'none';
-    document.getElementById('activatePanel').style.display = 'flex';
-    let tip = document.getElementById('tip');
-    tip.className = 'tip error';
-    tip.innerText='预览结束，请激活后使用';
-  },5000);
-}
 </script>
 </body>
 </html>
